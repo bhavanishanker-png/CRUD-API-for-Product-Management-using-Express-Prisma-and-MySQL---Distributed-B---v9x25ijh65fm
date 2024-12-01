@@ -1,17 +1,22 @@
 const express = require('express');
 const productRoutes = require('./routes/productRoutes');
+const authMiddleware = require('./middleware/authMiddleware');
 
 const app = express();
 app.use(express.json());
 
-// Product routes 
+// Apply auth middleware globally
+app.use(authMiddleware);
+
+// Product routes
 app.use('/api/products', productRoutes);
 
-// Start the server
-const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}`);
+// Handle 404 errors
+app.use((req, res) => {
+  res.status(404).json({ error: 'Route not found' });
 });
 
-
-module.exports=app;
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
+});
