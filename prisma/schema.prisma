@@ -13,10 +13,10 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model Cart {
-  cartId     Int    @id @default(autoincrement())
-  userId     Int
-  productId  Int
-  count      Int
+model Product {
+  id     Int    @id @default(autoincrement())
+  name   String
+  stock  Int
+  price  Float
 }
 
