@@ -5,15 +5,18 @@ const authMiddleware = require('./middleware/authMiddleware');
 const app = express();
 app.use(express.json());
 
-// Apply auth middleware globally
-app.use(authMiddleware);
-
-// Product routes
-app.use('/api/products', productRoutes);
+// Apply auth middleware only to product routes
+app.use('/api/products', authMiddleware, productRoutes);
 
 // Handle 404 errors
 app.use((req, res) => {
   res.status(404).json({ error: 'Route not found' });
+});
+
+// General error handling middleware
+app.use((err, req, res, next) => {
+  console.error(err);
+  res.status(500).json({ error: 'Internal Server Error' });
 });
 
 const PORT = process.env.PORT || 3000;
