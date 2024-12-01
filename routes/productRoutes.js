@@ -4,12 +4,12 @@ const authMiddleware = require('../middleware/authMiddleware');
 const {createProduct, getProducts, getProduct, updateProduct, patchProduct, deleteProduct} = require("../controllers/productController")
 
 //write your code here
-router.post("/create", authMiddleware, createProduct); 
-router.get("/get", authMiddleware,getProducts); 
-router.get("/getById/:id", authMiddleware, getProduct); 
-router.put("/put/:id", authMiddleware, updateProduct); 
-router.patch("/patch/:id", authMiddleware, patchProduct); 
-router.delete("/delete/:id", authMiddleware, deleteProduct);
+router.post("/create", createProduct); 
+router.get("/get", getProducts); 
+router.get("/getById/:id",  getProduct); 
+router.put("/put/:id", updateProduct); 
+router.patch("/patch/:id", patchProduct); 
+router.delete("/delete/:id",  deleteProduct);
 
 
 module.exports = router;

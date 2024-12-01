@@ -1,3 +1,4 @@
+// app.js or server.js
 const express = require('express');
 const productRoutes = require('./routes/productRoutes');
 const authMiddleware = require('./middleware/authMiddleware');
@@ -20,6 +21,13 @@ app.use((err, req, res, next) => {
 });
 
 const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
-});
+
+// Export the app instance
+module.exports = app;
+
+// Start the server in a separate file (optional)
+if (require.main === module) {
+  app.listen(PORT, () => {
+    console.log(`Server running on port ${PORT}`);
+  });
+}
